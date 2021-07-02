@@ -27,7 +27,7 @@ export default function Authorization(props) {
             <input type="text" name="auth-mail" onChange={handleChange}  value={person} placeholder="Введите ваш e-mail"></input>
             <p>Введите ваш пароль</p>
             <input type="password" name="auth-password" onChange={handlePasswordChange} placeholder="Введите ваш пароль"></input><br/>
-            <button type="submit">Отправить</button>
+            <button className="button" type="submit">Отправить</button>
         </form>
     );
 }
