@@ -24,7 +24,7 @@ export default class Registration extends React.Component {
             },
             body: JSON.stringify({
                 'type_hard': level,
-                'type': 1
+                'type': 1 // я не понимаю откуда этот тип, но без него не работает Что это?
             })
         })
             .then(response => response.json())
