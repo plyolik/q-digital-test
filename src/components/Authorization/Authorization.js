@@ -11,14 +11,14 @@ export default class Authorization extends React.Component {
     }
  
     handleChange = (e) => {
-        this.setState({email: e.target.value});
+        this.setState({email: e.target.value})
     }
     handlePasswordChange = (e) =>  {
-        this.setState({password: e.target.value});
+        this.setState({password: e.target.value})
     }
         
     handleSubmit = (e) =>  {
-        e.preventDefault();
+        e.preventDefault()
         
         let user = {
             email: this.state.email,
@@ -42,10 +42,11 @@ export default class Authorization extends React.Component {
 
                 let responseJson = JSON.stringify(response.data)
                 localStorage.setItem('token', responseJson)
+                this.props.history.push('/start-testing')
             })
 
-        this.setState({ email: ''});
-        this.setState({ password: ''});
+        this.setState({ email: ''})
+        this.setState({ password: ''})
     }
 
     render() {
@@ -53,11 +54,11 @@ export default class Authorization extends React.Component {
             <form onSubmit={this.handleSubmit} className="authorization">
                 <h2>Авторизация</h2>
                 <p>Введите ваш e-mail</p>
-                <input type="text" name="auth-mail" onChange={this.handleChange}  value={this.state.email} placeholder="Введите ваш e-mail"></input>
+                <input type="text" onChange={this.handleChange}  value={this.state.email} placeholder="Введите ваш e-mail"></input>
                 <p>Введите ваш пароль</p>
-                <input type="password" name="auth-password" onChange={this.handlePasswordChange} value={this.state.password} placeholder="Введите ваш пароль"></input><br/>
+                <input type="password" onChange={this.handlePasswordChange} value={this.state.password} placeholder="Введите ваш пароль"></input><br/>
                 <button className="button" type="submit">Отправить</button>
             </form>
-        );
+        )
     }
 }
