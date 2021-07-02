@@ -9,13 +9,7 @@ export default class Authorization extends React.Component {
             password: '',
         }
     }
-    // const users = []
-
-    // function getUsers() {
-    //     const usersJson = localStorage.getItem('users')
-    //     users = usersJson ? JSON.parse(usersJson) : []
-    // }
-        
+ 
     handleChange = (e) => {
         this.setState({email: e.target.value});
     }
@@ -26,6 +20,30 @@ export default class Authorization extends React.Component {
     handleSubmit = (e) =>  {
         e.preventDefault();
         
+        let user = {
+            email: this.state.email,
+            password: this.state.password,
+        }
+
+        fetch("https://internsapi.public.osora.ru/api/auth/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(response => response.json())
+            .then(response => {
+                if (!response.status) {
+                    const error = Object.keys(response.errors).map(k => response.errors[k].join(',')).join('\n')
+                    alert(error)
+                    return
+                }
+
+                let responseJson = JSON.stringify(response.data)
+                localStorage.setItem('token', responseJson)
+            })
+
         this.setState({ email: ''});
         this.setState({ password: ''});
     }

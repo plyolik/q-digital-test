@@ -1,8 +1,8 @@
 import './App.css';
 import React from 'react'
 import {BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
-import Authorization from './Authorization/Authorization'
-import Registration from './Registration/Registration'
+import Authorization from './components/Authorization/Authorization'
+import Registration from './components/Registration/Registration'
 
 class App extends React.Component {
 

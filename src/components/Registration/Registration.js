@@ -9,22 +9,8 @@ export default class Registration extends React.Component {
             password: '',
             passwordConfirmation: ''
         }
-        // this.getUsers()
     }
 
-
-    // users = []
-
-    // saveUsers = () => {
-    //     let usersJson = JSON.stringify(this.users)
-    //     localStorage.setItem('users', usersJson)
-    // }
-
-    // getUsers = () => {
-    //     const usersJson = localStorage.getItem('users')
-    //     this.users = usersJson ? JSON.parse(usersJson) : []
-    // }
-        
     handleChange = (e) => {
         this.setState({ person: e.target.value });
     }
@@ -48,22 +34,35 @@ export default class Registration extends React.Component {
             return
         }
 
-        // let user = {
-        //     name: this.state.person,
-        //     email: this.state.email,
-        //     password: this.state.password,
-        //     passwordConfirmation: this.state.passwordConfirmation
-        // }
+        let user = {
+            name: this.state.person,
+            email: this.state.email,
+            password: this.state.password,
+            password_confirmation: this.state.passwordConfirmation
+        }
 
-        // this.users.push(user)
-        // this.saveUsers()
+        fetch("https://internsapi.public.osora.ru/api/auth/signup", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(response => response.json())
+            .then(response => {
+                if (!response.status) {
+                    const error = Object.keys(response.errors).map(k => response.errors[k].join(',')).join('\n')
+                    alert(error)
+                    return
+                }
+                
+                this.props.history.push('/authorization')
+            })
 
         this.setState({ person: ''});
         this.setState({ email: ''});
         this.setState({ password: ''});
         this.setState({ passwordConfirmation: ''});
-
-        e.preventDefault();
     }
 
     render() { 
