@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export default class Registration extends React.Component {
     constructor(props) {
@@ -67,18 +68,24 @@ export default class Registration extends React.Component {
 
     render() { 
         return ( 
+            <div>
+            <nav>
+                <li><Link to="/authorization">Авторизация</Link></li>
+                <li><Link to="/registration">Регистрация</Link></li>
+            </nav>
             <form onSubmit={this.handleSubmit} className="authorization">
-            <h2>Регистрация</h2>
-            <p>Введите ваше имя</p>
-            <input type="text" name="auth-name" onChange={this.handleChange} value={this.state.person} placeholder="Введите ваше имя"></input>
-            <p>Введите ваш e-mail</p>
-            <input type="text" name="auth-mail" onChange={this.handleEmailChange}  value={this.state.email} placeholder="Введите ваш e-mail"></input>
-            <p>Введите ваш пароль</p>
-            <input type="password" name="auth-password" onChange={this.handlePasswordChange} value={this.state.password}  placeholder="Введите ваш пароль"></input><br/>
-            <p>Подтвердите пароль</p>
-            <input type="password" name="auth-password-confirmation" onChange={this.handlePasswordConfirmationChange} value={this.state.passwordConfirmation} placeholder="Подтвердите пароль"></input><br/>
-            <button className="button" type="submit">Отправить</button>
-        </form>
+                <h2>Регистрация</h2>
+                <p>Введите ваше имя</p>
+                <input type="text" name="auth-name" onChange={this.handleChange} value={this.state.person} placeholder="Введите ваше имя"></input>
+                <p>Введите ваш e-mail</p>
+                <input type="text" name="auth-mail" onChange={this.handleEmailChange}  value={this.state.email} placeholder="Введите ваш e-mail"></input>
+                <p>Введите ваш пароль</p>
+                <input type="password" name="auth-password" onChange={this.handlePasswordChange} value={this.state.password}  placeholder="Введите ваш пароль"></input><br/>
+                <p>Подтвердите пароль</p>
+                <input type="password" name="auth-password-confirmation" onChange={this.handlePasswordConfirmationChange} value={this.state.passwordConfirmation} placeholder="Подтвердите пароль"></input><br/>
+                <button className="btn" type="submit">Отправить</button>
+            </form>
+        </div>
         )
     }
 }

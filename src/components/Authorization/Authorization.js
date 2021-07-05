@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export default class Authorization extends React.Component {
 
@@ -35,7 +36,9 @@ export default class Authorization extends React.Component {
             .then(response => response.json())
             .then(response => {
                 if (!response.status) {
-                    const error = Object.keys(response.errors).map(k => response.errors[k].join(',')).join('\n')
+                    const error = typeof(response.errors) === 'string'
+                        ? response.errors 
+                        : Object.keys(response.errors).map(k => response.errors[k].join(',')).join('\n')
                     alert(error)
                     return
                 }
@@ -51,14 +54,20 @@ export default class Authorization extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit} className="authorization">
-                <h2>Авторизация</h2>
-                <p>Введите ваш e-mail</p>
-                <input type="text" onChange={this.handleChange}  value={this.state.email} placeholder="Введите ваш e-mail"></input>
-                <p>Введите ваш пароль</p>
-                <input type="password" onChange={this.handlePasswordChange} value={this.state.password} placeholder="Введите ваш пароль"></input><br/>
-                <button className="button" type="submit">Отправить</button>
-            </form>
+            <div>
+                <nav>
+                    <li><Link to="/authorization">Авторизация</Link></li>
+                    <li><Link to="/registration">Регистрация</Link></li>
+                </nav>
+                <form onSubmit={this.handleSubmit} className="authorization">
+                    <h2>Авторизация</h2>
+                    <p>Введите ваш e-mail</p>
+                    <input type="text" onChange={this.handleChange}  value={this.state.email} placeholder="Введите ваш e-mail"></input>
+                    <p>Введите ваш пароль</p>
+                    <input type="password" onChange={this.handlePasswordChange} value={this.state.password} placeholder="Введите ваш пароль"></input><br/>
+                    <button className="btn" type="submit">Отправить</button>
+                </form>
+            </div>
         )
     }
 }

@@ -8,6 +8,12 @@ export default class Registration extends React.Component {
         }
     }
 
+    componentDidMount = () => {
+        if (!localStorage.getItem('token')) {
+            this.props.history.push('/authorization')
+        }
+    }
+
     handleStartClick = (e) => {
         e.preventDefault()
 
@@ -24,11 +30,18 @@ export default class Registration extends React.Component {
             },
             body: JSON.stringify({
                 'type_hard': level,
-                'type': 1 // я не понимаю откуда этот тип, но без него не работает Что это?
+                'type': 1
             })
         })
             .then(response => response.json())
-            .then(response => console.log(response))
+            .then(response => {
+                console.log(response)
+                let responseJson = JSON.stringify(response.data)
+                localStorage.setItem('game', responseJson)
+                localStorage.setItem('level', level)
+                this.props.history.push('/game')
+
+            })
     }
     
     handleLevelChange = (e) => {
@@ -43,7 +56,7 @@ export default class Registration extends React.Component {
                     <option value="1">Easy/Легко</option>
                     <option value="2">Тяжело</option>
                 </select><br/>
-                <button onClick={this.handleStartClick} className="button">Start</button>
+                <button onClick={this.handleStartClick} className="btn">Start</button>
             </div>
         )
     }

@@ -2,8 +2,34 @@
     border: 2px solid red;
     padding: 1rem;
     margin: 1rem;
+    text-align: center;
 }
 
-.button {
-    margin: 10px 0;
-} 
+.btn, .answer {
+    border: 1px solid red;
+    border-radius: 5px;
+    text-align: center;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.answer {
+    width: 50px;
+    height: 20px;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+}
+
+.statistic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div[disabled] {
+  pointer-events: none;
+  opacity: 0.7;
+}
