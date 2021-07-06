@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react'
-import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Authorization from './components/Authorization/Authorization'
 import Registration from './components/Registration/Registration'
 import StartTesting from './components/StartTesting/StartTesting'
@@ -17,6 +17,9 @@ class App extends React.Component {
           <Route path="/start-testing" component={StartTesting} />
           <Route path="/game" component={Game} />
           <Route path="/statistic" component={Statistic} />
+          <Route path="/">
+            <Redirect to="/start-testing"></Redirect>
+          </Route>
         </Switch>
       </Router>
     );
