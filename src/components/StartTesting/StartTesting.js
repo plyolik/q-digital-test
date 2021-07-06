@@ -14,6 +14,11 @@ export default class Registration extends React.Component {
         }
     }
 
+    logout = () => {
+        localStorage.removeItem('token')
+        this.props.history.push('/authorization')
+    }
+
     handleStartClick = (e) => {
         e.preventDefault()
 
@@ -35,7 +40,6 @@ export default class Registration extends React.Component {
         })
             .then(response => response.json())
             .then(response => {
-                console.log(response)
                 let responseJson = JSON.stringify(response.data)
                 localStorage.setItem('game', responseJson)
                 localStorage.setItem('level', level)
@@ -50,13 +54,16 @@ export default class Registration extends React.Component {
     
     render() {
         return (
-            <div className="authorization">
-                <select onChange={this.handleLevelChange}>
-                    <option disabled="disabled" value>Выберите сложность</option>
-                    <option value="1">Easy/Легко</option>
-                    <option value="2">Тяжело</option>
-                </select><br/>
-                <button onClick={this.handleStartClick} className="btn">Start</button>
+            <div>
+                <button className='btn' onClick={this.logout}>Выйти</button>
+                <div className="authorization">
+                    <select onChange={this.handleLevelChange}>
+                        <option disabled="disabled" value>Выберите сложность</option>
+                        <option value="1">Easy/Легко</option>
+                        <option value="2">Тяжело</option>
+                    </select><br/>
+                    <button onClick={this.handleStartClick} className="btn">Start</button>
+                </div>
             </div>
         )
     }

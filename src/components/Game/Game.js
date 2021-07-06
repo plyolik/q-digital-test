@@ -53,8 +53,6 @@ export default class Game extends React.Component {
     }
 
     handleOptionClick = (option) => {
-        console.log(option)
-
         this.setState({disabled: true})
 
         clearInterval(this.state.interval)
@@ -88,7 +86,6 @@ export default class Game extends React.Component {
                     let responseJson = JSON.stringify(response.data)
                     localStorage.setItem('game', responseJson)
                     this.createFieldGame()
-                    console.log(response)
                     return
                 } 
 
@@ -131,15 +128,15 @@ export default class Game extends React.Component {
                         <div className="statistic">
                             <p>END GAME</p>
                             <table>
-                                <thead>
-                                    <th>Question</th>
-                                    <th>Answer</th>
-                                    <th>Correct</th>
-                                </thead>
                                 <tbody>
-                                    {this.state.statistic.questions.map(q => {
+                                    <tr>
+                                        <th>Question</th>
+                                        <th>Answer</th>
+                                        <th>Correct</th>
+                                    </tr>
+                                    {this.state.statistic.questions.map((q, i) => {
                                         return (
-                                            <tr>
+                                            <tr key={i}>
                                                 <td>{q.question}</td>
                                                 <td>{q.current_answer}</td>
                                                 <td>{q.answer}</td>
